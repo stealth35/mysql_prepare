@@ -2,11 +2,12 @@
 /**
  * @param string $query
  * @return string
+ * @param ressource $link optional
  */
-function mysql_prepare($query)
+function mysql_prepare($query, $link = null)
 {
     $stmt = uniqid();
-    $prep = sprintf('PREPARE `%s` FROM \'%s\'', $stmt, mysql_real_escape_string($query));
+    $prep = sprintf('PREPARE `%s` FROM \'%s\'', $stmt, mysql_real_escape_string($query, $link));
    
     if(mysql_query($prep))
     {
@@ -20,8 +21,9 @@ function mysql_prepare($query)
  * @param array $input_parameters optional
  * @param string $stmt
  * @return ressource
+ * @param ressource $link optional
  */
-function mysql_execute(array $input_parameters = array(), $stmt)
+function mysql_execute(array $input_parameters = array(), $stmt, $link = null)
 {
     foreach($input_parameters as $id => $input_parameter)
     {            
@@ -36,7 +38,7 @@ function mysql_execute(array $input_parameters = array(), $stmt)
             $sf = '@`%s` = \'%s\'';
         }
        
-        $sets[$key] = sprintf($sf, $id, mysql_real_escape_string((string) $input_parameter));
+        $sets[$key] = sprintf($sf, $id, mysql_real_escape_string((string) $input_parameter, $link));
     }
 
     if(!empty($sets))
@@ -55,15 +57,16 @@ function mysql_execute(array $input_parameters = array(), $stmt)
         $ext = sprintf('EXECUTE `%s`', $stmt);
     }        
 
-    return mysql_query($ext);
+    return mysql_query($ext, $link);
 }
 
 /**
  * @param ressource $result
  * @param string $type
  * @return array
+ * @param ressource $link optional
  */
-function mysql_fetch_all($result, $type = 'array')
+function mysql_fetch_all($result, $type = 'array', $link)
 {
     if($result === false)
     {
@@ -72,7 +75,7 @@ function mysql_fetch_all($result, $type = 'array')
 
     $func = 'mysql_fetch_' . strtolower($type);
 
-    while($row = call_user_func($func, $result))
+    while($row = call_user_func($func, $result, $link))
     {            
         if($row !== false)
         {
@@ -84,7 +87,7 @@ function mysql_fetch_all($result, $type = 'array')
         }
     }
 
-    mysql_free_result($result);
+    mysql_free_result($result, $link);
    
     if(!empty($rows))
     {
