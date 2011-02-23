@@ -1,3 +1,4 @@
+<?php
 /**
  * @param string $query
  * @return string
