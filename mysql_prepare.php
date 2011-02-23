@@ -9,7 +9,7 @@ function mysql_prepare($query, $link = null)
     $stmt = uniqid();
     $prep = sprintf('PREPARE `%s` FROM \'%s\'', $stmt, mysql_real_escape_string($query, $link));
    
-    if(mysql_query($prep))
+    if(mysql_query($prep, $link))
     {
         return $stmt;
     }
@@ -45,7 +45,7 @@ function mysql_execute(array $input_parameters = array(), $stmt, $link = null)
     {
         $set = sprintf('SET %s', implode(',', $sets));
        
-        if(mysql_query($set) === false)
+        if(mysql_query($set, $link) === false)
         {
             return false;
         }
