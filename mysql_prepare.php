@@ -1,8 +1,8 @@
 <?php
 /**
  * @param string $query
- * @return string
  * @param ressource $link optional
+ * @return string
  */
 function mysql_prepare($query, $link = null)
 {
@@ -20,8 +20,8 @@ function mysql_prepare($query, $link = null)
 /**
  * @param array $input_parameters optional
  * @param string $stmt
- * @return ressource
  * @param ressource $link optional
+ * @return ressource
  */
 function mysql_execute(array $input_parameters = array(), $stmt, $link = null)
 {
@@ -63,8 +63,8 @@ function mysql_execute(array $input_parameters = array(), $stmt, $link = null)
 /**
  * @param ressource $result
  * @param string $type
- * @return array
  * @param ressource $link optional
+ * @return array
  */
 function mysql_fetch_all($result, $type = 'array', $link)
 {
