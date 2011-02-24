@@ -66,7 +66,7 @@ function mysql_execute(array $input_parameters = array(), $stmt, $link = null)
  * @param ressource $link optional
  * @return array
  */
-function mysql_fetch_all($result, $type = 'array', $link)
+function mysql_fetch_all($result, $type = 'array', $link = null)
 {
     if($result === false)
     {
@@ -75,7 +75,7 @@ function mysql_fetch_all($result, $type = 'array', $link)
 
     $func = 'mysql_fetch_' . strtolower($type);
 
-    while($row = call_user_func($func, $result, $link = null))
+    while($row = call_user_func($func, $result, $link))
     {            
         if($row !== false)
         {
