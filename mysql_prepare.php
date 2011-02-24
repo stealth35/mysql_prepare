@@ -75,7 +75,7 @@ function mysql_fetch_all($result, $type = 'array', $link)
 
     $func = 'mysql_fetch_' . strtolower($type);
 
-    while($row = call_user_func($func, $result, $link))
+    while($row = call_user_func($func, $result, $link = null))
     {            
         if($row !== false)
         {
