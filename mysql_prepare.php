@@ -2,6 +2,7 @@
 /**
  * @param string $query
  * @param ressource $link optional
+ *
  * @return string
  */
 function mysql_prepare($query, $link = null)
@@ -21,6 +22,7 @@ function mysql_prepare($query, $link = null)
  * @param array $input_parameters optional
  * @param string $stmt
  * @param ressource $link optional
+ *
  * @return ressource
  */
 function mysql_execute(array $input_parameters = array(), $stmt, $link = null)
@@ -64,6 +66,7 @@ function mysql_execute(array $input_parameters = array(), $stmt, $link = null)
  * @param ressource $result
  * @param string $type optional
  * @param ressource $link optional
+ *
  * @return mixed
  */
 function mysql_fetch_all($result, $type = 'array', $link = null)
