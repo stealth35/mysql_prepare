@@ -69,7 +69,7 @@ function mysql_execute(array $input_parameters = array(), $stmt, $link = null)
  *
  * @return mixed
  */
-function mysql_fetch_all($result, $type = 'array')
+function mysql_fetch_all($result, $type = 'array', $group = false)
 {
     if($result === false)
     {
@@ -82,7 +82,29 @@ function mysql_fetch_all($result, $type = 'array')
     {            
         if($row !== false)
         {
-            $rows[] = $row;
+            if(true === $group)
+            {                   
+                if($type === 'array')
+                {
+                    array_shift($row);
+                }
+
+                if($type === 'object')
+                {
+                    $cols = get_object_vars($row);
+                    $col = array_shift($cols);
+                }
+                else
+                {
+                    $col = array_shift($row);
+                }
+                                
+                $rows[$col][] = $row;
+            }
+            else
+            {
+                $rows[] = $row;
+            }
         }
         else
         {
