@@ -82,7 +82,7 @@ function mysql_fetch_all($result, $type = 'array', $group = false)
     {            
         if(false !== $row)
         {
-            if(true === $group)
+            if($group)
             {                   
                 if('array' === $type)
                 {
