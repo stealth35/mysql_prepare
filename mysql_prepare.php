@@ -8,11 +8,31 @@
 function mysql_prepare($query, $link = null)
 {
     $stmt = uniqid();
-    $prep = sprintf('PREPARE `%s` FROM \'%s\'', $stmt, mysql_real_escape_string($query, $link));
-   
-    if(mysql_query($prep, $link))
+    
+    if(is_resource($link))
     {
-        return $stmt;
+        $query = mysql_real_escape_string($query, $link);
+    }
+    else
+    {
+        $query = mysql_real_escape_string($query);
+    }
+    
+    $prep = sprintf('PREPARE `%s` FROM \'%s\'', $stmt, $query);
+   
+    if(is_resource($link))
+    {
+        if(mysql_query($prep, $link))
+        {
+            return $stmt;
+        }
+    }
+    else
+    {
+        if(mysql_query($prep))
+        {
+            return $stmt;
+        }
     }
    
     return false;
@@ -39,27 +59,53 @@ function mysql_execute(array $input_parameters = array(), $stmt, $link = null)
         {          
             $sf = '@`%s` = \'%s\'';
         }
+        
+        $input_parameter = settype($input_parameter, 'string');
+        
+        if(is_resource($link))
+        {
+            $input_parameter = mysql_real_escape_string($input_parameter, $link);
+        }
+        else
+        {
+            $input_parameter = mysql_real_escape_string($input_parameter);
+        }
        
-        $sets[$key] = sprintf($sf, $id, mysql_real_escape_string((string) $input_parameter, $link));
+        $sets[$key] = sprintf($sf, $id, $input_parameter);
     }
 
     if(false === empty($sets))
     {
         $set = sprintf('SET %s', implode(',', $sets));
        
-        if(false === mysql_query($set, $link))
+        if(is_resource($link))
         {
-            return false;
+            if(false === mysql_query($set, $link))
+            {
+                return false;
+            }
         }
+        else
+        {
+            if(false === mysql_query($set))
+            {
+                return false;
+            }
+        }        
 
         $ext = sprintf('EXECUTE `%s` USING %s', $stmt, implode(',', array_keys($sets)));
     }
     else
     {
         $ext = sprintf('EXECUTE `%s`', $stmt);
-    }        
+    }
 
-    return mysql_query($ext, $link);
+    if(is_resource($link))
+    {
+        return mysql_query($ext, $link);
+    }
+
+    return mysql_query($ext);
 }
 
 /**
