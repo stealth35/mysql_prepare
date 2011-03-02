@@ -40,12 +40,12 @@ function mysql_prepare($query, $link = null)
 
 /**
  * @param array $input_parameters optional
- * @param string $stmt
  * @param ressource $link optional
+ * @param string $stmt
  *
  * @return ressource
  */
-function mysql_execute(array $input_parameters = array(), $stmt, $link = null)
+function mysql_execute($stmt, array $input_parameters = array(), $link = null)
 {
     foreach($input_parameters as $id => $input_parameter)
     {            
