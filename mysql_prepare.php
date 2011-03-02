@@ -65,7 +65,7 @@ function mysql_execute(array $input_parameters = array(), $stmt, $link = null)
 /**
  * @param ressource $result
  * @param string $type optional
- * @param ressource $link optional
+ * @param boolean $group optional
  *
  * @return mixed
  */
