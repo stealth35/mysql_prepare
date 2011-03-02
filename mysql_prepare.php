@@ -69,7 +69,7 @@ function mysql_execute(array $input_parameters = array(), $stmt, $link = null)
  *
  * @return mixed
  */
-function mysql_fetch_all($result, $type = 'array', $link = null)
+function mysql_fetch_all($result, $type = 'array')
 {
     if($result === false)
     {
@@ -78,7 +78,7 @@ function mysql_fetch_all($result, $type = 'array', $link = null)
 
     $func = 'mysql_fetch_' . strtolower($type);
 
-    while($row = call_user_func($func, $result, $link))
+    while($row = call_user_func($func, $result))
     {            
         if($row !== false)
         {
@@ -90,7 +90,7 @@ function mysql_fetch_all($result, $type = 'array', $link = null)
         }
     }
 
-    mysql_free_result($result, $link);
+    mysql_free_result($result);
    
     if(!empty($rows))
     {
