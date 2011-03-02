@@ -43,11 +43,11 @@ function mysql_execute(array $input_parameters = array(), $stmt, $link = null)
         $sets[$key] = sprintf($sf, $id, mysql_real_escape_string((string) $input_parameter, $link));
     }
 
-    if(!empty($sets))
+    if(false === empty($sets))
     {
         $set = sprintf('SET %s', implode(',', $sets));
        
-        if(mysql_query($set, $link) === false)
+        if(false === mysql_query($set, $link))
         {
             return false;
         }
@@ -71,28 +71,28 @@ function mysql_execute(array $input_parameters = array(), $stmt, $link = null)
  */
 function mysql_fetch_all($result, $type = 'array', $group = false)
 {
-    if($result === false)
+    if(false === $result)
     {
         return false;
     }
 
     $func = 'mysql_fetch_' . strtolower($type);
 
-    while($row = call_user_func($func, $result))
+    while(false !== ($row = call_user_func($func, $result)))
     {            
-        if($row !== false)
+        if(false !== $row)
         {
             if(true === $group)
             {                   
-                if($type === 'array')
+                if('array' === $type)
                 {
                     array_shift($row);
                 }
 
-                if($type === 'object')
+                if('object' === $type)
                 {
                     $cols = get_object_vars($row);
-                    $col = array_shift($cols);
+                    $col  = array_shift($cols);
                 }
                 else
                 {
@@ -114,7 +114,7 @@ function mysql_fetch_all($result, $type = 'array', $group = false)
 
     mysql_free_result($result);
    
-    if(!empty($rows))
+    if(false === empty($rows))
     {
         return $rows;
     }
