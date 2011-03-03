@@ -9,19 +9,25 @@ function mysql_prepare($query, $link = null)
 {
     if(false === is_string($query))
     {
-        trigger_error(sprintf('%s() expects parameter 1 to be string, %s given', __FUNCTION__, gettype($query)), E_USER_WARNING);
+        trigger_error(sprintf('%s() expects parameter 1 to be string, %s given', 
+        __FUNCTION__, gettype($query)), E_USER_WARNING);
+        
         return false;    
     }
     
     if(false === is_null($link) && false === is_resource($link))
     {
-        trigger_error(sprintf('%s() expects parameter 3 to be resource, %s given', __FUNCTION__, gettype($link)), E_USER_WARNING);
+        trigger_error(sprintf('%s() expects parameter 3 to be resource, %s given', 
+        __FUNCTION__, gettype($link)), E_USER_WARNING);
+        
         return false;    
     }
     
     if(is_resource($link) && 'mysql link' !== get_resource_type($link))
     {
-        trigger_error(sprintf('%s(): supplied resource is not a valid MySQL-Link resource', __FUNCTION__), E_USER_WARNING);
+        trigger_error(sprintf('%s(): supplied resource is not a valid MySQL-Link resource', 
+        __FUNCTION__), E_USER_WARNING);
+        
         return false;    
     }
 
@@ -67,26 +73,34 @@ function mysql_execute($stmt, $input_parameters = array(), $link = null)
 {
     if(false === is_string($stmt))
     {
-        trigger_error(sprintf('%s() expects parameter 1 to be string, %s given', __FUNCTION__, gettype($stmt)), E_USER_WARNING);
-        return false;    
+        trigger_error(sprintf('%s() expects parameter 1 to be string, %s given', 
+        __FUNCTION__, gettype($stmt)), E_USER_WARNING);
+        
+        return false;
     }
     
     if(false === is_array($input_parameters))
     {
-        trigger_error(sprintf('%s() expects parameter 2 to be an array, %s given', __FUNCTION__, gettype($input_parameters)), E_USER_WARNING);
-        return false;    
+        trigger_error(sprintf('%s() expects parameter 2 to be an array, %s given', 
+        __FUNCTION__, gettype($input_parameters)), E_USER_WARNING);
+        
+        return false;
     }
     
     if(false === is_null($link) && false === is_resource($link))
     {
-        trigger_error(sprintf('%s() expects parameter 3 to be resource, %s given', __FUNCTION__, gettype($link)), E_USER_WARNING);
-        return false;    
+        trigger_error(sprintf('%s() expects parameter 3 to be resource, %s given', 
+        __FUNCTION__, gettype($link)), E_USER_WARNING);
+        
+        return false;
     }
     
     if(is_resource($link) && 'mysql link' !== get_resource_type($link))
     {
-        trigger_error(sprintf('%s(): supplied resource is not a valid MySQL-Link resource', __FUNCTION__), E_USER_WARNING);
-        return false;    
+        trigger_error(sprintf('%s(): supplied resource is not a valid MySQL-Link resource', 
+        __FUNCTION__), E_USER_WARNING);
+        
+        return false;
     }
 
     foreach($input_parameters as $id => $input_parameter)
@@ -161,26 +175,34 @@ function mysql_fetch_all($result, $type = 'array', $group = false)
 {
     if(false === is_resource($result))
     {
-        trigger_error(sprintf('%s() expects parameter 1 to be resource, %s given', __FUNCTION__, gettype($result)), E_USER_WARNING);
-        return false;    
+        trigger_error(sprintf('%s() expects parameter 1 to be resource, %s given', 
+        __FUNCTION__, gettype($result)), E_USER_WARNING);
+        
+        return false;
     }
     
     if(false === is_string($type))
     {
-        trigger_error(sprintf('%s() expects parameter 2 to be string, %s given', __FUNCTION__, gettype($type)), E_USER_WARNING);
-        return false;    
+        trigger_error(sprintf('%s() expects parameter 2 to be string, %s given', 
+        __FUNCTION__, gettype($type)), E_USER_WARNING);
+        
+        return false;
     }
     
     if(false === is_bool($group))
     {
-        trigger_error(sprintf('%s() expects parameter 3 to be boolean, %s given', __FUNCTION__, gettype($group)), E_USER_WARNING);
-        return false;    
+        trigger_error(sprintf('%s() expects parameter 3 to be boolean, %s given', 
+        __FUNCTION__, gettype($group)), E_USER_WARNING);
+        
+        return false;
     }
 
     if(is_resource($result) && 'mysql result' !== get_resource_type($result))
     {
-        trigger_error(sprintf('%s(): supplied resource is not a valid MySQL-Link resource', __FUNCTION__), E_USER_WARNING);
-        return false;    
+        trigger_error(sprintf('%s(): supplied resource is not a valid MySQL-Link resource', 
+        __FUNCTION__), E_USER_WARNING);
+        
+        return false;
     }
 
     $func = 'mysql_fetch_' . strtolower($type);
