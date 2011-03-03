@@ -199,7 +199,7 @@ function mysql_fetch_all($result, $type = 'array', $group = false)
 
     if(is_resource($result) && 'mysql result' !== get_resource_type($result))
     {
-        trigger_error(sprintf('%s(): supplied resource is not a valid MySQL-Link resource', 
+        trigger_error(sprintf('%s(): supplied resource is not a valid MySQL result resource', 
         __FUNCTION__), E_USER_WARNING);
         
         return false;
