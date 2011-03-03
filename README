@@ -13,7 +13,7 @@ mysql_select_db('test');
 mysql_set_charset('utf8');
 
 $stmt = mysql_prepare('SELECT * FROM `test` WHERE `id` > ? LIMIT ?');
-$result = mysql_execute(array(5, 3), $stmt);
+$result = mysql_execute($stmt, array(5, 3));
 
 echo '<pre>';
 print_r(mysql_fetch_all($result, 'object'));
