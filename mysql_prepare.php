@@ -17,7 +17,7 @@ function mysql_prepare($query, $link = null)
     
     if(false === is_null($link) && false === is_resource($link))
     {
-        trigger_error(sprintf('%s() expects parameter 3 to be resource, %s given', 
+        trigger_error(sprintf('%s() expects parameter 2 to be resource, %s given', 
         __FUNCTION__, gettype($link)), E_USER_WARNING);
         
         return false;    
