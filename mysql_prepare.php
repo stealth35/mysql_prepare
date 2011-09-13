@@ -116,7 +116,7 @@ function mysql_execute($stmt, $input_parameters = array(), $link = null)
             $sf = '@`%s` = \'%s\'';
         }
         
-        $input_parameter = settype($input_parameter, 'string');
+        settype($input_parameter, 'string');
         
         if(is_resource($link))
         {
