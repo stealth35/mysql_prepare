@@ -10,7 +10,6 @@ Exemple :
 ---------
 ``` php
 <?php
-ini_set('mysql.trace_mode', true);
 mysql_connect('localhost', 'root', '');
 mysql_select_db('test');
 mysql_set_charset('utf8');
