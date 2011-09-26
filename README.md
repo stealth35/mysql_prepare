@@ -1,13 +1,15 @@
-Add three functions to mysql extension :
+Add to mysql extension :
+========================
 
  - mysql_prepare
  - mysql_execute
  - mysql_fetch_all
 
 
-Exemple : 
-
+Exemple :
+---------
 ``` php
+<?php
 ini_set('mysql.trace_mode', true);
 mysql_connect('localhost', 'root', '');
 mysql_select_db('test');
